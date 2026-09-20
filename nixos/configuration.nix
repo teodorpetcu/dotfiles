@@ -83,7 +83,6 @@ in
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     jack.enable = true;
-
     # Use the WirePlumber session manager
     wireplumber.enable = true;
   };
@@ -124,21 +123,39 @@ in
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
-    unzip
-    unrar
-    p7zip
-    pavucontrol
+    ## desktop
+    alacritty
+    spotify
+    discord
+    halloy
+    tuba
+    todoist-electron
+    anki
+    obsidian
+    gnome-solanum
     kdePackages.dolphin
-    wget
-    rclone
-    grim
-    slurp
     wl-clipboard
+    hyprpaper
+    fuzzel
+    krita
+    zathura
+    playerctl
+    brightnessctl
+    blueman
+    grim
+    pavucontrol
+    swayimg
 
+    ## dev
+    git
+    tmux
     neovim
     tree-sitter
     gcc
     nodejs
+    deno
+    bun # for experimental purposes
+    sqlite
     (python3.withPackages (pythonpkgs: with pythonpkgs; [ pip ]))
     cargo
     rustc
@@ -152,37 +169,31 @@ in
     docker-language-server
     lua-language-server
     ccls
+    vscode-css-languageserver
+    superhtml
 
-    spotify
-    discord
-    halloy
-    obsidian
-    todoist-electron
-    anki
-    gnome-solanum
-    git
-    alacritty
+    ## misc cli
+    cloc
+    onefetch
+    unzip
+    unrar
+    p7zip
+    wget
+    rclone
+    slurp
     htop
-    fuzzel
     fastfetch
-    tmux
-    playerctl
-    brightnessctl
-    hyprpaper
-    blueman
+    ripgrep
+    pkgs.texliveMedium # for Anki
+    rename # perl-rename
 
+    ## misc desktop
     kdePackages.qtstyleplugin-kvantum
     qt6Packages.qt6ct
     nwg-look
     adwaita-icon-theme
     juno-theme
     sddm-astronaut
-
-    pkgs.texliveMedium
-    zathura
-    tuba
-    rename # perl-rename
-    ripgrep
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -214,12 +225,6 @@ in
     nerd-fonts.symbols-only
   ];
 
-  # 16GiB swapfile should be enough
-  swapDevices = [{
-    device = "/var/lib/swapfile";
-    size = 16*1024; # 16 GiB
-  }];
-
   services.tlp = {
     enable = true;
     settings = {
@@ -243,6 +248,12 @@ in
       setSocketVariable = true;
     };
   };
+
+  # 16GiB swapfile should be enough
+  swapDevices = [{
+    device = "/var/lib/swapfile";
+    size = 16*1024; # 16 GiB
+  }];
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -273,5 +284,4 @@ in
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "26.05"; # Did you read the comment?
-
 }
