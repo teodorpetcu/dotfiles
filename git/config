@@ -1,0 +1,17 @@
+[user]
+	name = Teodor Petcu
+	email = petcuteodor03@gmail.com
+    signingkey = 0AFBD90DA6C7579D
+
+[core]
+	editor = nvim
+
+[init]
+	defaultBranch = master
+
+[commit]
+	template = ~/.config/git/gitmsg_template
+	gpgsign = true
+
+[color]
+	ui = true
